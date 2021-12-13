@@ -1,5 +1,5 @@
 # An application to read data from a remote IBM Db2 database
-This has been tested with a remote Db2 database running on an AIX system hosted in the IBM CECC. It is part of a wider demo looking at connecting new OpenShift based Cloud applications to data stored in on-premises systems.
+This has been tested with a remote Db2 database running on an AIX system hosted in the IBM Technology Zone. It is part of a wider demo looking at connecting new OpenShift based Cloud applications to data stored in on-premises systems. You can see the full demo write up on the [IBM Technology Zone](https://techzone.ibm.com/collection/connecting-to-db-2-on-aix-via-api-microservice-in-red-hat-open-shift-all-on-ibm-power).
 
 ## Usage
 This application presents a number of API endpoints over http to read data from a remote Db2 database. By default it listens on port 8080.
