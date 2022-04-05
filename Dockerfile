@@ -11,6 +11,8 @@ LABEL "version"="1.1"
 LABEL "description"="Microservice to present data in IBM Db2 as API endpoints."
 
 # runtime support to enable npm build capabilities
+RUN yum search numa
+# RUN yum update -y
 RUN yum -y install libstdc++ make gcc-c++ numactl-devel python39
 
 # XLC runtime support - required by ibm_db node package
