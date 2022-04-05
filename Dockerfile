@@ -2,7 +2,8 @@
 # This takes the node.js code in this repository and builds a container image to run it.
 # This will build for the ppc64le architecture **only**.
 
-FROM quay.io/centos/ppc64le:stream9
+# FROM quay.io/centos/ppc64le:stream9
+FROM ubi8/ubi:8.5
 # FROM ubi7/ubi:7.9 # requires an account with the Red Hat container registry
 
 LABEL "maintainer"="Andrew Laidlaw [andrew.laidlaw@uk.ibm.com]"
