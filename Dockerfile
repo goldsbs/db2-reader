@@ -16,11 +16,14 @@ RUN yum -y install libstdc++ make gcc-c++ numactl-devel python39
 # XLC runtime support - required by ibm_db node package
 RUN curl -sL http://public.dhe.ibm.com/software/server/POWER/Linux/xl-compiler/eval/ppc64le/rhel7/ibm-xl-compiler-eval.repo > /etc/yum.repos.d/xl-compilers.repo \
         && yum -y install libxlc
-        
+
 # install most up-to-date LTS node for ppc64le
 RUN cd /usr/local \
-        && curl -sL https://nodejs.org/dist/v14.17.5/node-v14.17.5-linux-ppc64le.tar.gz > node-v14.17.5-linux-ppc64le.tar.gz \
-        && tar --strip-components 1 -xf node-v14.17.5-linux-ppc64le.tar.gz
+        && RUN curl -sL https://nodejs.org/dist/v16.14.2/node-v16.14.2-linux-ppc64le.tar.gz > node-v16.14.2-Linux-ppc64le.tar.gz \
+        && tar --strip-components 1 -xf node-v16.14.2-Linux-ppc64le.tar.gz
+# RUN cd /usr/local \
+#        && curl -sL https://nodejs.org/dist/v14.17.5/node-v14.17.5-linux-ppc64le.tar.gz > node-v14.17.5-linux-ppc64le.tar.gz \
+#        && tar --strip-components 1 -xf node-v14.17.5-linux-ppc64le.tar.gz
 
 # install required node.js pacakges using npm
 COPY package*.json ./
