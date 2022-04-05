@@ -21,12 +21,12 @@ RUN curl -sL http://public.dhe.ibm.com/software/server/POWER/Linux/xl-compiler/e
         && yum -y install libxlc
 
 # install most up-to-date LTS node for ppc64le
-RUN cd /usr/local \
-        && curl -sL https://nodejs.org/dist/v16.14.2/node-v16.14.2-linux-ppc64le.tar.gz > node-v16.14.2-Linux-ppc64le.tar.gz \
-        && tar --strip-components 1 -xf node-v16.14.2-Linux-ppc64le.tar.gz
 # RUN cd /usr/local \
-#        && curl -sL https://nodejs.org/dist/v14.17.5/node-v14.17.5-linux-ppc64le.tar.gz > node-v14.17.5-linux-ppc64le.tar.gz \
-#        && tar --strip-components 1 -xf node-v14.17.5-linux-ppc64le.tar.gz
+#       && curl -sL https://nodejs.org/dist/v16.14.2/node-v16.14.2-linux-ppc64le.tar.gz > node-v16.14.2-Linux-ppc64le.tar.gz \
+#       && tar --strip-components 1 -xf node-v16.14.2-Linux-ppc64le.tar.gz
+RUN cd /usr/local \
+       && curl -sL https://nodejs.org/dist/v14.17.5/node-v14.17.5-linux-ppc64le.tar.gz > node-v14.17.5-linux-ppc64le.tar.gz \
+       && tar --strip-components 1 -xf node-v14.17.5-linux-ppc64le.tar.gz
 
 # install required node.js pacakges using npm
 COPY package*.json ./
