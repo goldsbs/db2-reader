@@ -13,8 +13,9 @@ LABEL "description"="Microservice to present data in IBM Db2 as API endpoints."
 RUN yum -y install libstdc++ make gcc-c++ numactl-devel python39
 
 # XLC runtime support - required by ibm_db node package
-RUN curl -sL http://public.dhe.ibm.com/software/server/POWER/Linux/xl-compiler/eval/ppc64le/rhel7/ibm-xl-compiler-eval.repo > /etc/yum.repos.d/xl-compilers.repo \
-        && yum -y install libxlc
+RUN curl -sL http://public.dhe.ibm.com/software/server/POWER/Linux/xl-compiler/eval/ppc64le/rhel7/ibm-xl-compiler-eval.repo > /etc/yum.repos.d/xl-compilers.repo
+RUN sed -i 's/gpgcheck=1/gpgcheck=0/g' /etc/yum.repos.d/xl-compilers.repo
+RUN yum -y install libxlc
         
 # install most up-to-date LTS node for ppc64le
 RUN cd /usr/local \
