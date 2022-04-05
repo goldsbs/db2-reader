@@ -2,8 +2,8 @@
 # This takes the node.js code in this repository and builds a container image to run it.
 # This will build for the ppc64le architecture **only**.
 
-FROM quay.io/centos/ppc64le:stream9
-# FROM ubi8/ubi:8.5
+# FROM quay.io/centos/ppc64le:stream9
+FROM ubi8/ubi:8.5
 # FROM ubi7/ubi:7.9 # requires an account with the Red Hat container registry
 
 LABEL "maintainer"="Andrew Laidlaw [andrew.laidlaw@uk.ibm.com]"
@@ -12,9 +12,9 @@ LABEL "description"="Microservice to present data in IBM Db2 as API endpoints."
 
 RUN yum provides "libcrypt.so.1"
 # runtime support to enable npm build capabilities
-# RUN yum -y install libstdc++ make gcc-c++ numactl-devel python39
+RUN yum -y install libstdc++ make gcc-c++ numactl-devel python39
 # RUN yum -y install libstdc++ make gcc-c++ python39
-RUN yum -y install libstdc++ make gcc-c++ python39 openssl-devel libcrypt
+# RUN yum -y install libstdc++ make gcc-c++ python39 openssl-devel libcrypt
 
 # XLC runtime support - required by ibm_db node package
 RUN curl -sL http://public.dhe.ibm.com/software/server/POWER/Linux/xl-compiler/eval/ppc64le/rhel7/ibm-xl-compiler-eval.repo > /etc/yum.repos.d/xl-compilers.repo
