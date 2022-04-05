@@ -10,10 +10,11 @@ LABEL "maintainer"="Andrew Laidlaw [andrew.laidlaw@uk.ibm.com]"
 LABEL "version"="1.0"
 LABEL "description"="Microservice to present data in IBM Db2 as API endpoints."
 
+RUN yum provides "libcrypt.so.1"
 # runtime support to enable npm build capabilities
 # RUN yum -y install libstdc++ make gcc-c++ numactl-devel python39
 # RUN yum -y install libstdc++ make gcc-c++ python39
-RUN yum -y install libstdc++ make gcc-c++ python39 glibc
+RUN yum -y install libstdc++ make gcc-c++ python39 openssl-devel libcrypt
 
 # XLC runtime support - required by ibm_db node package
 RUN curl -sL http://public.dhe.ibm.com/software/server/POWER/Linux/xl-compiler/eval/ppc64le/rhel7/ibm-xl-compiler-eval.repo > /etc/yum.repos.d/xl-compilers.repo
