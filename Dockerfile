@@ -4,7 +4,8 @@
 
 # FROM quay.io/centos/ppc64le:stream9
 # FROM ubi8/ubi:8.5
-FROM ubi7/ubi:7.9 # requires an account with the Red Hat container registry
+FROM ubi7/ubi:7.9
+# requires an account with the Red Hat container registry
 
 LABEL "maintainer"="Andrew Laidlaw [andrew.laidlaw@uk.ibm.com]"
 LABEL "version"="1.0"
