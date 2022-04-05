@@ -11,8 +11,9 @@ LABEL "version"="1.1"
 LABEL "description"="Microservice to present data in IBM Db2 as API endpoints."
 
 # runtime support to enable npm build capabilities
-# RUN yum update -y
-RUN yum -y install libstdc++ make gcc-c++ python39 numactl numactl-libs
+RUN yum list all
+RUN yum update -y
+RUN yum -y install libstdc++ make gcc-c++ python39
 
 # XLC runtime support - required by ibm_db node package
 RUN curl -sL http://public.dhe.ibm.com/software/server/POWER/Linux/xl-compiler/eval/ppc64le/rhel7/ibm-xl-compiler-eval.repo > /etc/yum.repos.d/xl-compilers.repo \
