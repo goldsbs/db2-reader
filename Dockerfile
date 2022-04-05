@@ -3,7 +3,7 @@
 # This will build for the ppc64le architecture **only**.
 
 # FROM quay.io/centos/ppc64le:8
-FROM docker.io/ppc64le/centos:latest
+FROM docker.io/ppc64le/centos:7.9
 # FROM ubi7/ubi:7.9 # requires an account with the Red Hat container registry
 
 LABEL "maintainer"="Andrew Laidlaw [andrew.laidlaw@uk.ibm.com]"
