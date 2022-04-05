@@ -4,7 +4,7 @@
 
 # FROM quay.io/centos/ppc64le:8
 # FROM ubi7/ubi:7.9 # requires an account with the Red Hat container registry
-FROM ubi8/ubi:8.2
+FROM ubi8/ubi-init:8.2
 
 LABEL "maintainer"="Andrew Laidlaw [andrew.laidlaw@uk.ibm.com]"
 LABEL "version"="1.1"
