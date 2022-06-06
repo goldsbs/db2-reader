@@ -41,7 +41,7 @@ app.get('/', function(request, response) {
 
 // Get an object containing all details of all products in the database
 app.get('/getTables', function(request, response) {
-  console.log("Request for /getCharacter");
+  console.log("Request for /getTables");
   ibmdb.open(connStr, function (err,conn) {
     if (err){
       console.log(err);
