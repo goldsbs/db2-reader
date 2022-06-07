@@ -39,15 +39,16 @@ app.get('/', function(request, response) {
   response.json({success:1, message:'service running'});
 })
 
-// Get an object containing all details of all products in the database
-app.get('/get10Ratings', function(request, response) {
-  console.log("Request for /get10Ratings");
+// Get all the productions with the requested character
+// Request should be of form <hostname>:8080/getFilmsWithChar?id=<character name>
+app.get('/getFilmsWithChar', function(request, response) {
+  console.log("Request for /getFilmsWithChar with Employee Number "+request.query.id);
   ibmdb.open(connStr, function (err,conn) {
     if (err){
       console.log(err);
       return response.json({success:-1, message:err});
     }
-    conn.query("SELECT * FROM "+process.env.DB_SCHEMA+".RATINGS LIMIT 10;", function (err,data) {
+    conn.query("SELECT PRIMARY_TITLE FROM "+process.env.DB_SCHEMA+".TITLES A, "+process.env.DB_SCHEMA+".PRINCIPALS B WHERE A.TCONST = B.TCONST and CHARACTERS="+request.query.id+";", function (err,data) {
       if (err){
         console.log(err);
         return response.json({success:-2,message:err});
@@ -60,16 +61,16 @@ app.get('/get10Ratings', function(request, response) {
   })
 })
 
-// Get an object containing the full details of a particular employee identified by their ID
-// Request should be of form <hostname>:8080/getEmployee?id=<employee ID>
-app.get('/getEmployee', function(request, response) {
-  console.log("Request for /getEmployee with Employee Number "+request.query.id);
+// Get principal actors in given film
+// Request should be of form <hostname>:8080/getActorsInFilm?id=<film name>
+app.get('/getActorsInFilm', function(request, response) {
+  console.log("Request for /getActorsInFilm for film called "+request.query.id);
   ibmdb.open(connStr, function (err,conn) {
     if (err){
       console.log(err);
       return response.json({success:-1, message:err});
     }
-    conn.query("SELECT * FROM "+process.env.DB_SCHEMA+".EMPLOYEE WHERE EMPNO="+request.query.id+";", function (err,data) {
+    conn.query("SELECT NAME, CHARACTERS FROM "+process.env.DB_SCHEMA+".NAME A, PRINCIPALS B, TITLES C WHERE B.TCONST = C.TCONST AND A.NCONST = B.NCONST AND TITLE_TYPE='movie' AND CHARCTERS!=' ' AND PRIMARY_TITLE="+request.query.id+";", function (err,data) {
       if (err){
         console.log(err);
         return response.json({success:-2,message:err});
