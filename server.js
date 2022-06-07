@@ -40,14 +40,14 @@ app.get('/', function(request, response) {
 })
 
 // Get an object containing all details of all products in the database
-app.get('/getTables', function(request, response) {
-  console.log("Request for /getTables");
+app.get('/get10Ratings', function(request, response) {
+  console.log("Request for /get10Ratings");
   ibmdb.open(connStr, function (err,conn) {
     if (err){
       console.log(err);
       return response.json({success:-1, message:err});
     }
-    conn.query("list tables for "+process.env.DB_SCHEMA+";", function (err,data) {
+    conn.query("SELECT * FROM "+process.env.DB_SCHEMA+".RATINGS LIMIT 10;", function (err,data) {
       if (err){
         console.log(err);
         return response.json({success:-2,message:err});
