@@ -83,6 +83,28 @@ app.get('/getActorsInFilm', function(request, response) {
   })
 })
 
+// Get career history for given actor
+// Request should be of form <hostname>:8080/getCareerHistory?id=<actor>
+app.get('/getCareerHistory', function(request, response) {
+  console.log("Request for /getCareerHistory for actor called "+request.query.id);
+  ibmdb.open(connStr, function (err,conn) {
+    if (err){
+      console.log(err);
+      return response.json({success:-1, message:err});
+    }
+    conn.query("SELECT PRIMARY_TITLE, CHARACTERS, TITLE_TYPE, START_YEAR, AVERAGE_RATING, NUM_VOTES FROM "+process.env.DB_SCHEMA+".NAME A, PRINCIPALS B, TITLES C WHERE B.TCONST = C.TCONST AND A.NCONST = B.NCONST AND CHARCTERS!=' ' AND PRIMARY_NAME="+request.query.id+";", function (err,data) {
+      if (err){
+        console.log(err);
+        return response.json({success:-2,message:err});
+      }
+      conn.close(function () {
+        console.log("Response provided");
+        return response.json({success:1, message:'Data Received', data:data});
+      });
+    })
+  })
+})
+
 // Get an object containing limited details of all employees in the database
 // Returns the employee number, first name, last name, and job title of each employee
 app.get('/getEmployees', function(request, response) {
