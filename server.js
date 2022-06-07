@@ -47,7 +47,7 @@ app.get('/getTables', function(request, response) {
       console.log(err);
       return response.json({success:-1, message:err});
     }
-    conn.query("list tables for user;", function (err,data) {
+    conn.query("'list tables for user';", function (err,data) {
       if (err){
         console.log(err);
         return response.json({success:-2,message:err});
