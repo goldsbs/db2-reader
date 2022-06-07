@@ -42,7 +42,7 @@ app.get('/', function(request, response) {
 // Get all the productions with the requested character
 // Request should be of form <hostname>:8080/getFilmsWithChar?id=<character name>
 app.get('/getFilmsWithChar', function(request, response) {
-  console.log("Request for /getFilmsWithChar with Employee Number "+request.query.id);
+  console.log("Request for /getFilmsWithChar with character name "+request.query.id);
   ibmdb.open(connStr, function (err,conn) {
     if (err){
       console.log(err);
