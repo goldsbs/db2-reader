@@ -48,7 +48,7 @@ app.get('/getFilmsWithChar', function(request, response) {
       console.log(err);
       return response.json({success:-1, message:err});
     }
-    conn.query("SELECT PRIMARY_TITLE FROM "+process.env.DB_SCHEMA+".TITLES A, "+process.env.DB_SCHEMA+".PRINCIPALS B WHERE A.TCONST = B.TCONST and CHARACTERS="+request.query.id+";", function (err,data) {
+    conn.query("SELECT PRIMARY_TITLE FROM "+process.env.DB_SCHEMA+".TITLES A, "+process.env.DB_SCHEMA+".PRINCIPALS B WHERE A.TCONST = B.TCONST and CHARACTERS LIKE '%"+request.query.id+"%';", function (err,data) {
       if (err){
         console.log(err);
         return response.json({success:-2,message:err});
