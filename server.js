@@ -55,7 +55,7 @@ app.get('/getFilmsWithChar', function(request, response) {
       }
       conn.close(function () {
         console.log("Response provided");
-        return response.data;
+        return response.json({success:1, message:'Data Received', data:data});
       });
     })
   })
