@@ -70,7 +70,7 @@ app.get('/getActorsInFilm', function(request, response) {
       console.log(err);
       return response.json({success:-1, message:err});
     }
-    conn.query("SELECT PRIMARY_NAME, CHARACTERS FROM "+process.env.DB_SCHEMA+".NAME A, PRINCIPALS B, TITLES C WHERE B.TCONST = C.TCONST AND A.NCONST = B.NCONST AND TITLE_TYPE='movie' AND CHARACTERS!=' ' AND PRIMARY_TITLE LIKE '%"+request.query.id+"%';", function (err,data) {
+    conn.query("SELECT A.PRIMARY_NAME, B.CHARACTERS FROM "+process.env.DB_SCHEMA+".NAME A, PRINCIPALS B, TITLES C WHERE B.TCONST = C.TCONST AND A.NCONST = B.NCONST AND C.TITLE_TYPE='movie' AND B.CHARACTERS!=' ' AND C.PRIMARY_TITLE LIKE '%"+request.query.id+"%';", function (err,data) {
       if (err){
         console.log(err);
         return response.json({success:-2,message:err});
