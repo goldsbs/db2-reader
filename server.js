@@ -71,7 +71,7 @@ app.get('/getActorsInFilm', function(request, response) {
       console.log(err);
       return response.json({success:-1, message:err});
     }
-    conn.query("SELECT NAME, CHARACTERS FROM "+process.env.DB_SCHEMA+".NAME A, PRINCIPALS B, TITLES C WHERE B.TCONST = C.TCONST AND A.NCONST = B.NCONST AND TITLE_TYPE='movie' AND CHARCTERS!=' ' AND PRIMARY_TITLE="+request.query.id+";", function (err,data) {
+    conn.query("SELECT NAME, CHARACTERS FROM "+process.env.DB_SCHEMA+".NAME A, PRINCIPALS B, TITLES C WHERE B.TCONST = C.TCONST AND A.NCONST = B.NCONST AND TITLE_TYPE='movie' AND CHARACTERS!=' ' AND PRIMARY_TITLE="+request.query.id+";", function (err,data) {
       if (err){
         console.log(err);
         return response.json({success:-2,message:err});
