@@ -78,7 +78,7 @@ app.get('/getActorsInFilm', function(request, response) {
       }
       conn.close(function () {
         console.log("Response provided");
-        return response.json({success:1, message:'Data Received', data:data});
+        return response.json({data:data});
       });
     })
   })
