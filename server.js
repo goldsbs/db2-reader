@@ -56,7 +56,6 @@ app.get('/getFilmsWithChar', function(request, response) {
       conn.close(function () {
         console.log("Response provided");
         return response.json({data:data});
-        //return response.json({success:1, message:'Data Received', data:data});
       });
     })
   })
@@ -93,79 +92,15 @@ app.get('/getCareerHistory', function(request, response) {
       console.log(err);
       return response.json({success:-1, message:err});
     }
-    conn.query("SELECT PRIMARY_TITLE, CHARACTERS, TITLE_TYPE, START_YEAR, AVERAGE_RATING, NUM_VOTES FROM "+process.env.DB_SCHEMA+".NAME A, PRINCIPALS B, TITLES C WHERE B.TCONST = C.TCONST AND A.NCONST = B.NCONST AND CHARCTERS!=' ' AND PRIMARY_NAME="+request.query.id+";", function (err,data) {
+    conn.query("SELECT PRIMARY_TITLE, CHARACTERS, TITLE_TYPE, START_YEAR, AVERAGE_RATING, NUM_VOTES FROM "+process.env.DB_SCHEMA+".NAME A, PRINCIPALS B, TITLES C WHERE B.TCONST = C.TCONST AND A.NCONST = B.NCONST AND CHARACTERS!=' ' AND PRIMARY_NAME LIKE '%"+request.query.id+"%';", function (err,data) {
       if (err){
         console.log(err);
         return response.json({success:-2,message:err});
       }
       conn.close(function () {
         console.log("Response provided");
-        return response.json({success:1, message:'Data Received', data:data});
+        return response.json({data:data});
       });
-    })
-  })
-})
-
-// Get an object containing limited details of all employees in the database
-// Returns the employee number, first name, last name, and job title of each employee
-app.get('/getEmployees', function(request, response) {
-  console.log("Request for /getEmployees");
-  ibmdb.open(connStr, function (err,conn) {
-    if (err){
-      console.log(err);
-      return response.json({success:-1, message:err});
-    }
-    conn.query("SELECT EMPNO,FIRSTNME,LASTNAME,JOB FROM "+process.env.DB_SCHEMA+".EMPLOYEE;", function (err,data) {
-      if (err){
-        console.log(err);
-        return response.json({success:-2,message:err});
-      }
-      conn.close(function () {
-        console.log("Response provided");
-        return response.json({success:1, message:'Data Received!', data:data});
-      });
-    })
-  })
-})
-
-
-// Get an object containing limited details of all employees in the database
-// Returns the employee number, first name, last name, job title, and department name of each employee
-app.get('/getAllEmployees', function(request, response) {
-  console.log("Request for /getAllEmployees");
-  ibmdb.open(connStr, function (err,conn) {
-    if (err){
-      console.log(err);
-      return response.json({success:-1, message:err});
-    }
-    conn.query("SELECT e.EMPNO,e.FIRSTNME,e.LASTNAME,e.JOB,d.DEPTNAME FROM "+process.env.DB_SCHEMA+".EMPLOYEE e INNER JOIN "+process.env.DB_SCHEMA+".DEPARTMENT d ON e.WORKDEPT = d.DEPTNO;", function (err,data) {
-      if (err){
-        console.log(err);
-        return response.json({success:-2,message:err});
-      }
-      conn.close(function () {
-        console.log("Response provided");
-        return response.json({success:1, message:'Data Received!', data:data});
-      });
-    })
-  })
-})
-
-// Get an object containing limited details of all employees in the database
-// Returns the employee number, first name, last name, and job title of each employee
-// This is a synchronous call on the database
-app.get('/getEmps', function(request, response) {
-  console.log("Request for /getEmps");
-  ibmdb.open(connStr, function (err,conn) {
-    if (err){
-      console.log(err);
-      return response.json({success:-1, message:err});
-    }
-    var output = conn.querySync("SELECT EMPNO,FIRSTNME,LASTNAME,JOB FROM "+process.env.DB_SCHEMA+".EMPLOYEE;");
-
-    conn.close(function () {
-      console.log("Response provided");
-      return response.json({success:1, message:'Data Received!', data:output});
     })
   })
 })
