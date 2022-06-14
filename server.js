@@ -44,9 +44,8 @@ app.get('/', function(request, response) {
 // Request should be of form <hostname>:8080/getFilmsWithChar?id=<character name>
 app.get('/getFilmsWithChar', function(request, response) {
   console.log("Request for /getFilmsWithChar with character name "+request.query.id);
-  var option = { connectTimeout : 120 };// Connection Timeout after 40 seconds.
 
-  ibmdb.openSync(connStr, option, function (err,conn) {
+  ibmdb.openSync(connStr, function (err,conn) {
     if (err){
       console.log(err);
       return response.json({success:-1, message:err});
