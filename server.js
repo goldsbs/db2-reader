@@ -27,6 +27,7 @@ const DB_SCHEMA = process.env.db_schema;
 // Setup the endpoint for the Db2 database we are connecting to
 let connStr = "DATABASE="+process.env.DB_DATABASE+";HOSTNAME="+process.env.DB_HOSTNAME+";PORT="+process.env.DB_PORT+";PROTOCOL=TCPIP;UID="+process.env.DB_UID+";PWD="+process.env.DB_PWD+";";
 
+
 // Basic healthcheck endpoint
 app.get('/healthz', function(request, response) {
   console.log('Healthcheck');
@@ -43,7 +44,9 @@ app.get('/', function(request, response) {
 // Request should be of form <hostname>:8080/getFilmsWithChar?id=<character name>
 app.get('/getFilmsWithChar', function(request, response) {
   console.log("Request for /getFilmsWithChar with character name "+request.query.id);
-  ibmdb.open(connStr, function (err,conn) {
+  var option = { connectTimeout : 120 };// Connection Timeout after 40 seconds.
+
+  ibmdb.openSync(connStr, option, function (err,conn) {
     if (err){
       console.log(err);
       return response.json({success:-1, message:err});
