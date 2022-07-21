@@ -12,7 +12,7 @@ RUN yum -y install libstdc++ make gcc-c++ numactl-devel
 RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && yum -y install python36
 
 # XLC runtime support - required by ibm_db node package
-RUN curl -sL http://public.dhe.ibm.com/software/server/POWER/Linux/xl-compiler/eval/ppc64le/rhel7/ibm-xl-compiler-eval.repo > /etc/yum.repos.d/xl-compilers.repo \
+# RUN curl -sL http://public.dhe.ibm.com/software/server/POWER/Linux/xl-compiler/eval/ppc64le/rhel7/ibm-xl-compiler-eval.repo > /etc/yum.repos.d/xl-compilers.repo \
         && yum -y install libxlc
 
 # install most up-to-date LTS node for ppc64le
