@@ -45,7 +45,7 @@ app.get('/', function(request, response) {
 app.get('/getFilmsWithChar', function(request, response) {
   console.log("Request for /getFilmsWithChar with character name "+request.query.id);
 
-  ibmdb.openSync(connStr, function (err,conn) {
+  ibmdb.open(connStr, function (err,conn) {
     if (err){
       console.log(err);
       return response.json({success:-1, message:err});
