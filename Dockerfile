@@ -13,7 +13,7 @@ RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.n
 
 # XLC runtime support - required by ibm_db node package
 # RUN curl -sL http://public.dhe.ibm.com/software/server/POWER/Linux/xl-compiler/eval/ppc64le/rhel7/ibm-xl-compiler-eval.repo > /etc/yum.repos.d/xl-compilers.repo \
-        && yum -y install libxlc
+#        && yum -y install libxlc
 
 # install most up-to-date LTS node for ppc64le
 # RUN cd /usr/local \
