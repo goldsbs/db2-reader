@@ -106,7 +106,7 @@ app.get('/getCareerHistory', function(request, response) {
     var realident=ident[0].NCONST;
     console.log (realident);
       
-    conn.query("SELECT t.PRIMARY_TITLE, p.CHARACTERS, r.AVERAGE_RATING, r.NUM_VOTES, t.START_YEAR, t.TITLE_TYPE  FROM PRINCIPALS p JOIN RATINGS r ON p.TCONST = r.tconst JOIN titles t ON p.TCONST = t.tconst WHERE p.NCONST = '"+realident+"';", function (err,data) {
+    conn.query("SELECT t.PRIMARY_TITLE, p.CHARACTERS, t.TITLE_TYPE, t.START_YEAR, r.AVERAGE_RATING, r.NUM_VOTES FROM PRINCIPALS p JOIN RATINGS r ON p.TCONST = r.tconst JOIN titles t ON p.TCONST = t.tconst WHERE p.NCONST = '"+realident+"';", function (err,data) {
       if (err){
         console.log(err);
         return response.json({success:-2,message:err});
