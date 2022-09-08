@@ -100,35 +100,26 @@ app.get('/getCareerHistory', function(request, response) {
     }
     //conn.query("SELECT PRIMARY_TITLE, CHARACTERS, TITLE_TYPE, START_YEAR, AVERAGE_RATING, NUM_VOTES FROM "+process.env.DB_SCHEMA+".NAME A, PRINCIPALS B, TITLES C, RATINGS D WHERE B.TCONST = C.TCONST AND C.TCONST = D.TCONST AND A.NCONST = B.NCONST AND CHARACTERS!=' ' AND PRIMARY_NAME LIKE '%"+request.query.id+"%';", function (err,data) {
     var ident;
+    ident=conn.querySync("SELECT n.NCONST FROM NAME n WHERE n.BIRTH_YEAR IS NOT NULL AND n.PRIMARY_NAME LIKE INITCAP ('"+request.query.id+"')")
+
+    console.log ("straight ident:"+ident);
+    console.log ("stringify:"+JSON.stringify(data));
+    
+    //conn.query("SELECT n.NCONST FROM NAME n WHERE n.BIRTH_YEAR IS NOT NULL AND n.PRIMARY_NAME LIKE INITCAP ('"+request.query.id+"')", function (err,data) {
       
-    conn.query("SELECT n.NCONST FROM NAME n WHERE n.BIRTH_YEAR IS NOT NULL AND n.PRIMARY_NAME LIKE INITCAP ('"+request.query.id+"')", function (err,data) {
-      
+    conn.query("SELECT t.PRIMARY_TITLE, p."CHARACTERS", r.AVERAGE_RATING, r.NUM_VOTES, t.START_YEAR, t.TITLE_TYPE  FROM PRINCIPALS p JOIN RATINGS r ON p.TCONST = r.tconst JOIN titles t ON p.TCONST = t.tconst WHERE p.NCONST = '"+ident+"';", function (err,data) {
       if (err){
         console.log(err);
         return response.json({success:-2,message:err});
       }
+
+      console.log(data);
+      
       conn.close(function () {
-        console.log("id of actor is:"+JSON.stringify(data));
-        ident=data[0].NCONST;
-        console.log(ident);
-        //return response.json({data:data});
+          console.log("closing");
+          return response.json({data:data});
       });    //conn.close
-    });      // conn.query
- 
-    console.log("Connection complete:"+ident);
-    return response.json({data:ident});
-//    conn.query("SELECT t.PRIMARY_TITLE, p."CHARACTERS", r.AVERAGE_RATING, r.NUM_VOTES, t.START_YEAR, t.TITLE_TYPE  FROM PRINCIPALS p JOIN RATINGS r ON p.TCONST = r.tconst JOIN titles t ON p.TCONST = t.tconst WHERE p.NCONST = '"+ident+"';", function (err,data) {
-//    if (err){
-//        console.log(err);
-//        return response.json({success:-2,message:err});
-//      }
-//      conn.close(function () {
-//        console.log(ident);
-//        console.log("history:"+JSON.stringify(data));
-//        return response.json({data:data});
-//      });     //conn.close
-//    })        // conn.query
-    
+    });      // conn.query    
   })          // ibmdb.open
 })            // app.get
 
