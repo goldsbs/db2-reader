@@ -100,7 +100,7 @@ app.get('/getCareerHistory', function(request, response) {
     }
     //conn.query("SELECT PRIMARY_TITLE, CHARACTERS, TITLE_TYPE, START_YEAR, AVERAGE_RATING, NUM_VOTES FROM "+process.env.DB_SCHEMA+".NAME A, PRINCIPALS B, TITLES C, RATINGS D WHERE B.TCONST = C.TCONST AND C.TCONST = D.TCONST AND A.NCONST = B.NCONST AND CHARACTERS!=' ' AND PRIMARY_NAME LIKE '%"+request.query.id+"%';", function (err,data) {
     var ident;
-    ident=conn.querySync("SELECT n.NCONST FROM NAME n WHERE n.BIRTH_YEAR IS NOT NULL AND n.PRIMARY_NAME LIKE INITCAP ('"+request.query.id+"')")
+    ident=conn.querySync("SELECT n.NCONST FROM NAME n WHERE n.BIRTH_YEAR IS NOT NULL AND n.PRIMARY_NAME LIKE INITCAP ('"+request.query.id+"')");
 
     console.log ("straight ident:"+ident);
     console.log ("stringify:"+JSON.stringify(data));
