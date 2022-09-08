@@ -117,6 +117,7 @@ app.get('/getCareerHistory', function(request, response) {
       conn.close(function () {
           console.log("query complete");
           var result=data.filter( element => element.TITLE_TYPE =="movie");
+          console.log(result);
           return response.json({data:result});
  //         return response.json({data:data});
       });     //conn.close
