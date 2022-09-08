@@ -50,14 +50,17 @@ app.get('/getFilmsWithChar', function(request, response) {
       console.log(err);
       return response.json({success:-1, message:err});
     }
-    conn.query("SELECT PRIMARY_TITLE FROM "+process.env.DB_SCHEMA+".TITLES A, "+process.env.DB_SCHEMA+".PRINCIPALS B WHERE A.TCONST = B.TCONST and CHARACTERS LIKE '%"+request.query.id+"%';", function (err,data) {
-      if (err){
+    //conn.query("SELECT PRIMARY_TITLE FROM "+process.env.DB_SCHEMA+".TITLES A, "+process.env.DB_SCHEMA+".PRINCIPALS B WHERE A.TCONST = B.TCONST and CHARACTERS LIKE '%"+request.query.id+"%';", function (err,data) {
+    conn.query("SELECT t.PRIMARY_TITLE,t.TITLE_TYPE FROM "+process.env.DB_SCHEMA+".TITLES t, LEFT JOIN "+process.env.DB_SCHEMA+".PRINCIPALS p ON t.TCONST = p.TCONST WHERE p.ORDERING = 1 AND p.CHARACTERS LIKE INITCAP('%"+request.query.id+"%');", function (err,data) {
+        
+    if (err){
         console.log(err);
         return response.json({success:-2,message:err});
       }
       conn.close(function () {
-        console.log("Response provided");
-        return response.json({data:data});
+        console.log("Response provided"+data);
+        const filtered=data.filter(data => data.title_type === "movie");
+        return response.json({data:filtered});
       });
     })
   })
@@ -72,6 +75,7 @@ app.get('/getActorsInFilm', function(request, response) {
       console.log(err);
       return response.json({success:-1, message:err});
     }
+    //conn.query("SELECT A.PRIMARY_NAME, B.CHARACTERS FROM "+process.env.DB_SCHEMA+".NAME A, PRINCIPALS B, TITLES C WHERE B.TCONST = C.TCONST AND A.NCONST = B.NCONST AND C.TITLE_TYPE='movie' AND B.CHARACTERS!=' ' AND C.PRIMARY_TITLE LIKE '%"+request.query.id+"%';", function (err,data) {
     conn.query("SELECT A.PRIMARY_NAME, B.CHARACTERS FROM "+process.env.DB_SCHEMA+".NAME A, PRINCIPALS B, TITLES C WHERE B.TCONST = C.TCONST AND A.NCONST = B.NCONST AND C.TITLE_TYPE='movie' AND B.CHARACTERS!=' ' AND C.PRIMARY_TITLE LIKE '%"+request.query.id+"%';", function (err,data) {
       if (err){
         console.log(err);
