@@ -58,9 +58,9 @@ app.get('/getFilmsWithChar', function(request, response) {
         return response.json({success:-2,message:err});
       }
       conn.close(function () {
-        console.log("Response provided"+data);
-        const filtered=data.filter(data => data.title_type === "movie");
-        return response.json({data:filtered});
+        console.log(data);
+        //const filtered=data.filter(data => data.title_type === "movie");
+        return response.json({data:data});
       });
     })
   })
