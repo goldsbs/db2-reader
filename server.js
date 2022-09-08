@@ -60,6 +60,8 @@ app.get('/getFilmsWithChar', function(request, response) {
       conn.close(function () {
         //console.log(data);
         var result=data.filter( element => element.TITLE_TYPE =="movie");
+        result.map (element=>{delete element["TITLE_TYPE"]})
+        console.log("query complete\n"+result);
         return response.json({data:result});
       });
     })
