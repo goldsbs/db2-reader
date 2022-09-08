@@ -109,7 +109,7 @@ app.get('/getCareerHistory', function(request, response) {
       }
       conn.close(function () {
         console.log("id of actor is:"+JSON.stringify(data));
-        ident=data[NCONST];
+        ident=data[0].NCONST;
         console.log(ident);
         return response.json({data:data});
       })     //conn.close
