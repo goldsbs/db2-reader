@@ -113,7 +113,7 @@ app.get('/getCareerHistory', function(request, response) {
         console.log(ident);
         //return response.json({data:data});
       });     //conn.close
-    })        // conn.query
+    });       // conn.query
     console.log(ident);
     conn.query("SELECT t.PRIMARY_TITLE, p."CHARACTERS", r.AVERAGE_RATING, r.NUM_VOTES, t.START_YEAR, t.TITLE_TYPE  FROM PRINCIPALS p JOIN RATINGS r ON p.TCONST = r.tconst JOIN titles t ON p.TCONST = t.tconst WHERE p.NCONST = '"+ident+"';", function (err,data) {
     if (err){
@@ -126,7 +126,6 @@ app.get('/getCareerHistory', function(request, response) {
         return response.json({data:data});
       });     //conn.close
     })        // conn.query
-    console.log(ident);
   })          // ibmdb.open
 })            // app.get
 
