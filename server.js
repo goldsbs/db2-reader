@@ -106,7 +106,7 @@ app.get('/getCareerHistory', function(request, response) {
         return response.json({success:-2,message:err});
       }
       conn.close(function () {
-        console.log("id of actor is:"+data);
+        console.log("id of actor is:"+JSON.stringify(data));
         return response.json({data:data});
       });     //conn.close
     })        // conn.query
