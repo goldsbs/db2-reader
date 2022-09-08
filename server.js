@@ -99,6 +99,8 @@ app.get('/getCareerHistory', function(request, response) {
       return response.json({success:-1, message:err});
     }
     //conn.query("SELECT PRIMARY_TITLE, CHARACTERS, TITLE_TYPE, START_YEAR, AVERAGE_RATING, NUM_VOTES FROM "+process.env.DB_SCHEMA+".NAME A, PRINCIPALS B, TITLES C, RATINGS D WHERE B.TCONST = C.TCONST AND C.TCONST = D.TCONST AND A.NCONST = B.NCONST AND CHARACTERS!=' ' AND PRIMARY_NAME LIKE '%"+request.query.id+"%';", function (err,data) {
+    var ident;
+      
     conn.query("SELECT n.NCONST FROM NAME n WHERE n.BIRTH_YEAR IS NOT NULL AND n.PRIMARY_NAME LIKE INITCAP ('"+request.query.id+"')", function (err,data) {
       
       if (err){
@@ -107,10 +109,24 @@ app.get('/getCareerHistory', function(request, response) {
       }
       conn.close(function () {
         console.log("id of actor is:"+JSON.stringify(data));
+        ident=data[NCONST];
+        console.log(ident);
+        //return response.json({data:data});
+      });     //conn.close
+    })        // conn.query
+    console.log(ident);
+    conn.query("SELECT t.PRIMARY_TITLE, p."CHARACTERS", r.AVERAGE_RATING, r.NUM_VOTES, t.START_YEAR, t.TITLE_TYPE  FROM PRINCIPALS p JOIN RATINGS r ON p.TCONST = r.tconst JOIN titles t ON p.TCONST = t.tconst WHERE p.NCONST = '"+ident+"';", function (err,data) {
+    if (err){
+        console.log(err);
+        return response.json({success:-2,message:err});
+      }
+      conn.close(function () {
+        console.log(ident);
+        console.log("history:"+JSON.stringify(data));
         return response.json({data:data});
       });     //conn.close
     })        // conn.query
-      // SELECT t.PRIMARY_TITLE, p."CHARACTERS", r.AVERAGE_RATING, r.NUM_VOTES, t.START_YEAR, t.TITLE_TYPE  FROM PRINCIPALS p JOIN RATINGS r ON p.TCONST = r.tconst JOIN titles t ON p.TCONST = t.tconst WHERE p.NCONST = 'nm0000015'     
+    console.log(ident);
   })          // ibmdb.open
 })            // app.get
 
