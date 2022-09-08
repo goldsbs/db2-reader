@@ -103,7 +103,7 @@ app.get('/getCareerHistory', function(request, response) {
     ident=conn.querySync("SELECT n.NCONST FROM NAME n WHERE n.BIRTH_YEAR IS NOT NULL AND n.PRIMARY_NAME LIKE INITCAP ('"+request.query.id+"')");
 
     console.log ("straight ident:"+ident);
-    console.log ("stringify:"+JSON.stringify(data));
+    console.log ("stringify:"+JSON.stringify(ident));
     
     //conn.query("SELECT n.NCONST FROM NAME n WHERE n.BIRTH_YEAR IS NOT NULL AND n.PRIMARY_NAME LIKE INITCAP ('"+request.query.id+"')", function (err,data) {
       
