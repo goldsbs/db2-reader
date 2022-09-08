@@ -105,7 +105,6 @@ app.get('/getCareerHistory', function(request, response) {
     console.log ("stringify:"+JSON.stringify(ident));
     var realident=ident[0].NCONST;
     console.log (realident);
-    //conn.query("SELECT n.NCONST FROM NAME n WHERE n.BIRTH_YEAR IS NOT NULL AND n.PRIMARY_NAME LIKE INITCAP ('"+request.query.id+"')", function (err,data) {
       
     conn.query("SELECT t.PRIMARY_TITLE, p.CHARACTERS, r.AVERAGE_RATING, r.NUM_VOTES, t.START_YEAR, t.TITLE_TYPE  FROM PRINCIPALS p JOIN RATINGS r ON p.TCONST = r.tconst JOIN titles t ON p.TCONST = t.tconst WHERE p.NCONST = '"+realident+"';", function (err,data) {
       if (err){
