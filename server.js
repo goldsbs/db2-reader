@@ -51,7 +51,7 @@ app.get('/getFilmsWithChar', function(request, response) {
       return response.json({success:-1, message:err});
     }
     //conn.query("SELECT PRIMARY_TITLE FROM "+process.env.DB_SCHEMA+".TITLES A, "+process.env.DB_SCHEMA+".PRINCIPALS B WHERE A.TCONST = B.TCONST and CHARACTERS LIKE '%"+request.query.id+"%';", function (err,data) {
-    conn.query("SELECT t.PRIMARY_TITLE,t.TITLE_TYPE FROM "+process.env.DB_SCHEMA+".TITLES t, LEFT JOIN "+process.env.DB_SCHEMA+".PRINCIPALS p ON t.TCONST = p.TCONST WHERE p.ORDERING = 1 AND p.CHARACTERS LIKE INITCAP('%"+request.query.id+"%');", function (err,data) {
+    conn.query("SELECT t.PRIMARY_TITLE,t.TITLE_TYPE FROM "+process.env.DB_SCHEMA+".TITLES t LEFT JOIN "+process.env.DB_SCHEMA+".PRINCIPALS p ON t.TCONST = p.TCONST WHERE p.ORDERING = 1 AND p.CHARACTERS LIKE INITCAP('%"+request.query.id+"%');", function (err,data) {
         
     if (err){
         console.log(err);
