@@ -115,8 +115,10 @@ app.get('/getCareerHistory', function(request, response) {
 //      console.log(data);
       
       conn.close(function () {
-          //console.log("closing");
-          return response.json({data:data});
+          console.log("query complete");
+          var result=data.filter( element => element.TITLE_TYPE =="movie");
+          return response.json({data:result});
+ //         return response.json({data:data});
       });     //conn.close
     })        // conn.query    
   })          // ibmdb.open
