@@ -113,10 +113,10 @@ app.get('/getCareerHistory', function(request, response) {
         return response.json({success:-2,message:err});
       }
 
-      console.log(data);
+//      console.log(data);
       
       conn.close(function () {
-          console.log("closing");
+          //console.log("closing");
           return response.json({data:data});
       });     //conn.close
     })        // conn.query    
