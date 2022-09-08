@@ -111,21 +111,23 @@ app.get('/getCareerHistory', function(request, response) {
         console.log("id of actor is:"+JSON.stringify(data));
         ident=data[NCONST];
         console.log(ident);
-        //return response.json({data:data});
-      });     //conn.close
-    });       // conn.query
-    console.log(ident);
-    conn.query("SELECT t.PRIMARY_TITLE, p."CHARACTERS", r.AVERAGE_RATING, r.NUM_VOTES, t.START_YEAR, t.TITLE_TYPE  FROM PRINCIPALS p JOIN RATINGS r ON p.TCONST = r.tconst JOIN titles t ON p.TCONST = t.tconst WHERE p.NCONST = '"+ident+"';", function (err,data) {
-    if (err){
-        console.log(err);
-        return response.json({success:-2,message:err});
-      }
-      conn.close(function () {
-        console.log(ident);
-        console.log("history:"+JSON.stringify(data));
         return response.json({data:data});
-      });     //conn.close
-    })        // conn.query
+      })     //conn.close
+    })       // conn.query
+ 
+//    console.log(ident);
+//    conn.query("SELECT t.PRIMARY_TITLE, p."CHARACTERS", r.AVERAGE_RATING, r.NUM_VOTES, t.START_YEAR, t.TITLE_TYPE  FROM PRINCIPALS p JOIN RATINGS r ON p.TCONST = r.tconst JOIN titles t ON p.TCONST = t.tconst WHERE p.NCONST = '"+ident+"';", function (err,data) {
+//    if (err){
+//        console.log(err);
+//        return response.json({success:-2,message:err});
+//      }
+//      conn.close(function () {
+//        console.log(ident);
+//        console.log("history:"+JSON.stringify(data));
+//        return response.json({data:data});
+//      });     //conn.close
+//    })        // conn.query
+    
   })          // ibmdb.open
 })            // app.get
 
