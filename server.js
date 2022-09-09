@@ -134,12 +134,12 @@ app.get('/getCareerHistory', function(request, response) {
           var text=JSON.stringify(result);
           text=text.replace(/!/g,"");
           text=text.replace(/null/g,'"NA"');
-          text=text.replace(/AVERAGE_RATING/g,'R');
-          text=text.replace(/TITLE_TYPE/g,'TYPE');
-          text=text.replace(/PRIMARY_TITLE/g,'TITLE');
-          text=text.replace(/NUM_VOTES/g,'VOTES');
-          text=text.replace(/START_YEAR/g,'YEAR');
-          text=text.replace(/CHARACTERS/g,'CHARS');
+          text=text.replace(/_/g,'');
+//          text=text.replace(/TITLE_TYPE/g,'TYPE');
+//          text=text.replace(/PRIMARY_TITLE/g,'PRIMARYTITLE');
+//          text=text.replace(/NUM_VOTES/g,'VOTES');
+//          text=text.replace(/START_YEAR/g,'YEAR');
+//          text=text.replace(/CHARACTERS/g,'CHARS');
           result=JSON.parse(text);
           console.log(result);
           return response.json({data:result});
