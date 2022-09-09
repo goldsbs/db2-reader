@@ -127,9 +127,9 @@ app.get('/getCareerHistory', function(request, response) {
               result=data.filter( element => element.TITLE_TYPE =="video");
           if (result.length == 0)
               result={success:-2,message:"No data foundd for this search"};
-          if (result.length > 2) {
-              result=result.splice(2,2);
-          }
+  //        if (result.length > 2) {
+  //            result=result.splice(2,2);
+  //        }
           console.log(result);
           return response.json({data:result});
  //         return response.json({data:data});
