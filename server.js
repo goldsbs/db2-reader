@@ -128,7 +128,7 @@ app.get('/getCareerHistory', function(request, response) {
           if (result.length == 0)
               result={success:-2,message:"No data foundd for this search"};
           if (result.length > 2) {
-              result=result.splice(2,(result.length-2));
+              result=result.splice(2,2);
           }
           console.log(result);
           return response.json({data:result});
