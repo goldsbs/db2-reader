@@ -59,7 +59,7 @@ app.get('/getFilmsWithChar', function(request, response) {
       }
       conn.close(function () {
         //console.log(data);
-        var result=data.filter( element => element.TITLE_TYPE =="movie");
+        var result=data.filter( element => element.TITLE_TYPE =="movie" || element.TITLE_TYPE =="video");
         //result.map (element=>{delete element["TITLE_TYPE"]})
         console.log("query complete");
         console.log (result);
@@ -119,7 +119,7 @@ app.get('/getCareerHistory', function(request, response) {
       
       conn.close(function () {
           console.log("query complete");
-          var result=data.filter( element => element.TITLE_TYPE =="movie");
+          var result=data.filter( element => element.TITLE_TYPE =="movie" || element.TITLE_TYPE =="video");
           console.log(result);
           return response.json({data:result});
  //         return response.json({data:data});
