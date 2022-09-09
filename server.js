@@ -133,6 +133,7 @@ app.get('/getCareerHistory', function(request, response) {
           result=data.filter( element => element.START_YEAR ==1983 && element.NUM_VOTES==9);
           var text=JSON.stringify(result);
           text=text.replace(/!/g,"");
+          text=text.replace(":null",":\"\"");
           result=JSON.parse(text);
           console.log(result);
           return response.json({data:result});
