@@ -133,7 +133,7 @@ app.get('/getCareerHistory', function(request, response) {
           result=data.filter( element => element.START_YEAR <1988);
           var text=JSON.stringify(result);
           text=text.replace(/!/g,"");
-          text=text.replace(":null",":\"N/A\"");
+          text=text.replace("null","\"Not Avail\"");
           result=JSON.parse(text);
           console.log(result);
           return response.json({data:result});
