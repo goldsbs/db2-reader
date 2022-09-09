@@ -130,7 +130,7 @@ app.get('/getCareerHistory', function(request, response) {
   //        if (result.length > 2) {
   //            result=result.splice(2,2);
   //        }
-          result=data.filter( element => element.START_YEAR <1985);
+          result=data.filter( element => element.START_YEAR <1990 && element.START_YEAR >1984);
           var text=JSON.stringify(result);
           text=text.replace(/!/g,"");
           text=text.replace(":null",":\"\"");
