@@ -133,8 +133,13 @@ app.get('/getCareerHistory', function(request, response) {
           result=data.filter( element => element.START_YEAR <1988);
           var text=JSON.stringify(result);
           text=text.replace(/!/g,"");
-          text=text.replace('null','"Not Avail"');
-          text=text.replace('""','"Not Avail"');
+          text=text.replace('null','"NA"');
+          text=text.replace('AVERAGE_RATING','R');
+          text=text.replace('TITLE_TYPE','TYPE');
+          text=text.replace('PRIMARY_TITLE','TITLE');
+          text=text.replace('NUM_VOTES','VOTES');
+          text=text.replace('START_YEAR','YEAR');
+          text=text.replace('CHARACTERS','CHARS');
           result=JSON.parse(text);
           console.log(result);
           return response.json({data:result});
